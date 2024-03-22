@@ -1,2 +1,4 @@
 black
 black[jupyter]
+torch
+torchvision

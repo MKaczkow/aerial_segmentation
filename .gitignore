@@ -1,3 +1,14 @@
+# archives
+*.zip
+
+# venv 
+venv/*
+venv/
+
+# data
+data/DubaiSemanticSegmentationDataset/*
+data/DubaiSemanticSegmentationDataset/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
