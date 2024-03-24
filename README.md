@@ -4,13 +4,20 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 
 ## TODO
-- [ ] zapoznanie z datasetem *INRIA*
-- [ ] zapoznanie z datasetem *Aerial Image Segmentation from Online Maps*
-- [ ] zapoznanie z datasetem *UAVid Semantic Segmentation Dataset*
-- [ ] zapoznanie z datasetem *Aerial Semantic Segmentation Drone Dataset*
-- [ ] zapoznanie z datasetem *Semantic segmentation of aerial imagery*
+- [x] zapoznanie z datasetem *INRIA*
+- [x] zapoznanie z datasetem *Aerial Image Segmentation from Online Maps*
+- [x] zapoznanie z datasetem *UAVid Semantic Segmentation Dataset*
+- [x] zapoznanie z datasetem *Aerial Semantic Segmentation Drone Dataset*
 - [ ] zapoznanie z libką *segmentation_models.pytorch*
+- [ ] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
+- [x] doinstalować torcha z CUDA (skill issue xd)
+- [ ] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
+- [ ] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
+- [ ] dokończenie prezentacji
+- [ ] (opcjonalnie) publikacja na Kaggle
 
+## Prezka
+* opisane w [readme](./docs/README.md)
 
 ## Intro
 Dobra, żeby zacząć już coś robić w projekcie, proponuję pójść w stronę przeglądu / ensemble różnych modeli i/lub datasetów, porównać, itd.

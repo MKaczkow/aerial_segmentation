@@ -6,8 +6,20 @@ venv/*
 venv/
 
 # data
-data/DubaiSemanticSegmentationDataset/*
-data/DubaiSemanticSegmentationDataset/
+data/DubaiSemanticSegmentationDataset/**/*.png
+data/DubaiSemanticSegmentationDataset/**/*.jpg
+data/DubaiSemanticSegmentationDataset/**/*.json
+data/AerialDroneSemanticSegmentationDataset/**/*.png
+data/AerialDroneSemanticSegmentationDataset/**/*.jpg
+data/AerialDroneSemanticSegmentationDataset/**/*.csv
+data/INRIAAerialImageLabellingDataset/**/*.png
+data/INRIAAerialImageLabellingDataset/**/*.jpg
+data/INRIAAerialImageLabellingDataset/**/*.tif
+data/UAVidSemanticSegmentationDataset/**/*.png
+data/UAVidSemanticSegmentationDataset/**/*.jpg
+
+# logs
+logs/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

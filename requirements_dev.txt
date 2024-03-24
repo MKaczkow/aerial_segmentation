@@ -1,4 +1,10 @@
+albumentations
 black
 black[jupyter]
+matplotlib
+pandas
+pytorch-lightning
+segmentation-models-pytorch
 torch
 torchvision
+tensorboard
