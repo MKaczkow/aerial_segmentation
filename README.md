@@ -4,14 +4,17 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 
 ## TODO
-- [ ] zapoznanie z libką *segmentation_models.pytorch*
-- [ ] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
+- [ ] ile klas w UAVid?
+- [ ] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5])
+- [ ] stworzenie funkcji ewaluacyjnej
 - [ ] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
 - [ ] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
 - [ ] literatura
     - [ ] jakie jest SOTA w tym problemie? (top 5)
     - [ ] dobre modele z Kaggle (po jednym dla każdego datasetu)
     - [ ] inne rzeczy warte uwagi
+- [x] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
+- [x] zapoznanie z libką *segmentation_models.pytorch*
 - [ ] (opcjonalnie) publikacja na Kaggle
 - [x] zapoznanie z datasetem *INRIA*
 - [x] zapoznanie z datasetem *Aerial Image Segmentation from Online Maps*
@@ -19,6 +22,20 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 - [x] zapoznanie z datasetem *Aerial Semantic Segmentation Drone Dataset*
 - [x] doinstalować torcha z CUDA (skill issue xd)
 - [x] dokończenie prezentacji
+
+## Dane
+
+### Ilość klas w poszczególnych zbiorach
+* `INRIA`: 2 (binary - *building* i *non-building*) [source](https://project.inria.fr/aerialimagelabeling/)
+* `Dubai`: 6  [source](https://www.kaggle.com/datasets/humansintheloop/semantic-segmentation-of-aerial-imagery/data)
+    - Building: #3C1098
+    - Land (unpaved area): #8429F6
+    - Road: #6EC1E4
+    - Vegetation: #FEDD3A
+    - Water: #E2A929
+    - Unlabeled: #9B9B9B     
+* `Aerial Drone`: 20 (tree, gras, other vegetation, dirt, gravel, rocks, water, paved area, pool, person, dog, car, bicycle, roof, wall, fence, fence-pole, window, door, obstacle) [source](https://www.kaggle.com/datasets/bulentsiyah/semantic-drone-dataset/data)
+* `UAVid`: ???
 
 ## Problemy
 * model musi przyjmować dowolny (albo z dużego zbioru) rozmiar obrazka, a nie stały, bo datasety mają różne rozmiary obrazków, a nawet mogą być różne w ramach datasetu
