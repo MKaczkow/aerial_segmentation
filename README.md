@@ -4,17 +4,24 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 
 ## TODO
+- [ ] zapoznanie z libką *segmentation_models.pytorch*
+- [ ] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
+- [ ] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
+- [ ] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
+- [ ] literatura
+    - [ ] jakie jest SOTA w tym problemie? (top 5)
+    - [ ] dobre modele z Kaggle (po jednym dla każdego datasetu)
+    - [ ] inne rzeczy warte uwagi
+- [ ] (opcjonalnie) publikacja na Kaggle
 - [x] zapoznanie z datasetem *INRIA*
 - [x] zapoznanie z datasetem *Aerial Image Segmentation from Online Maps*
 - [x] zapoznanie z datasetem *UAVid Semantic Segmentation Dataset*
 - [x] zapoznanie z datasetem *Aerial Semantic Segmentation Drone Dataset*
-- [ ] zapoznanie z libką *segmentation_models.pytorch*
-- [ ] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
 - [x] doinstalować torcha z CUDA (skill issue xd)
-- [ ] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
-- [ ] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
-- [ ] dokończenie prezentacji
-- [ ] (opcjonalnie) publikacja na Kaggle
+- [x] dokończenie prezentacji
+
+## Problemy
+* model musi przyjmować dowolny (albo z dużego zbioru) rozmiar obrazka, a nie stały, bo datasety mają różne rozmiary obrazków, a nawet mogą być różne w ramach datasetu
 
 ## Prezka
 * opisane w [readme](./docs/README.md)
