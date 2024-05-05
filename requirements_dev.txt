@@ -1,11 +1,14 @@
 albumentations
+catalyst
 black
 black[jupyter]
 matplotlib
 pandas
 patchify
 pytorch-lightning
+seaborn
 segmentation-models-pytorch
 torch
 torchvision
 tensorboard
+wandb

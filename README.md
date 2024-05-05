@@ -4,7 +4,6 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 
 ## TODO
-- [ ] ile klas w UAVid?
 - [ ] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5])
 - [ ] stworzenie funkcji ewaluacyjnej
 - [ ] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
@@ -13,9 +12,10 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - [ ] jakie jest SOTA w tym problemie? (top 5)
     - [ ] dobre modele z Kaggle (po jednym dla każdego datasetu)
     - [ ] inne rzeczy warte uwagi
+- [ ] (opcjonalnie) publikacja na Kaggle
+- [x] ile klas w UAVid?
 - [x] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
 - [x] zapoznanie z libką *segmentation_models.pytorch*
-- [ ] (opcjonalnie) publikacja na Kaggle
 - [x] zapoznanie z datasetem *INRIA*
 - [x] zapoznanie z datasetem *Aerial Image Segmentation from Online Maps*
 - [x] zapoznanie z datasetem *UAVid Semantic Segmentation Dataset*
@@ -35,7 +35,15 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - Water: #E2A929
     - Unlabeled: #9B9B9B     
 * `Aerial Drone`: 20 (tree, gras, other vegetation, dirt, gravel, rocks, water, paved area, pool, person, dog, car, bicycle, roof, wall, fence, fence-pole, window, door, obstacle) [source](https://www.kaggle.com/datasets/bulentsiyah/semantic-drone-dataset/data)
-* `UAVid`: ???
+* `UAVid`: 8 [source](https://www.kaggle.com/code/alexalex02/semantic-segmentation-of-aerial-images)
+    1. *building*: living houses, garages, skyscrapers, security booths, and buildings under construction.
+    2. *road*: road or bridge surface that cars can run on legally. Parking lots are not included.
+    3. *tree*: tall trees that have canopies and main trunks.
+    4. *low vegetation*: grass, bushes and shrubs.
+    5. *static car*: cars that are not moving, including static buses, trucks, automobiles, and tractors. Bicycles and motorcycles are not included.
+    6. *moving car*: cars that are moving, including moving buses, trucks, automobiles, and tractors. Bicycles and motorcycles are not included.
+    7. *human*: pedestrians, bikers, and all other humans occupied by different activities.
+    8. *clutter*: all objects not belonging to any of the classes above.
 
 ## Problemy
 * model musi przyjmować dowolny (albo z dużego zbioru) rozmiar obrazka, a nie stały, bo datasety mają różne rozmiary obrazków, a nawet mogą być różne w ramach datasetu
