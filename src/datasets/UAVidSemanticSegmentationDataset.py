@@ -18,7 +18,7 @@ class UAVidSemanticSegmentationDataset(Dataset):
 
         self.root_path = os.path.join(
             root_path, split, split
-        )   # weirdly, datapath contains this path twice
+        )  # weirdly, datapath contains this path twice
         self.transforms = transforms
 
         self.image_paths, self.masks_paths = self._get_paths()

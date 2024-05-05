@@ -3,6 +3,7 @@ black
 black[jupyter]
 matplotlib
 pandas
+patchify
 pytorch-lightning
 segmentation-models-pytorch
 torch

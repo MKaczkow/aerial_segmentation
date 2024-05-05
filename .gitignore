@@ -5,6 +5,9 @@
 venv/*
 venv/
 
+# drafts
+DRAFT.ipynb
+
 # data
 data/DubaiSemanticSegmentationDataset/**/*.png
 data/DubaiSemanticSegmentationDataset/**/*.jpg
