@@ -2,6 +2,7 @@ albumentations
 catalyst
 black
 black[jupyter]
+isort
 matplotlib
 pandas
 patchify

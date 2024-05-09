@@ -1,8 +1,8 @@
 import os
-from typing import Tuple, List
+from typing import List, Tuple
 
-from PIL import Image
 import torch
+from PIL import Image
 from torch.utils.data import Dataset
 from torchvision.transforms import ToTensor
 
