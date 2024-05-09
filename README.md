@@ -6,7 +6,7 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 
 ## TODO
 - [ ] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5])
-- [ ] stworzenie funkcji ewaluacyjnej
+- [ ] tak samo w UAVid - dane są zakodowane, tak, żeby dało się je wyświetlić, a nie do modelu
 - [ ] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
 - [ ] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
 - [ ] literatura
@@ -15,6 +15,8 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - [ ] inne rzeczy warte uwagi
 - [ ] (opcjonalnie) publikacja na Kaggle
 - [ ] dodanie wymiarów tensorów w annotacjach / *type hints*
+- [ ] *deep dive* UNet
+- [x] stworzenie funkcji ewaluacyjnej
 - [x] ile klas w UAVid?
 - [x] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
 - [x] zapoznanie z libką *segmentation_models.pytorch*
@@ -47,6 +49,19 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     7. *human*: pedestrians, bikers, and all other humans occupied by different activities.
     8. *clutter*: all objects not belonging to any of the classes above.
 
+### Ilość obrazków w poszczególnych zbiorach
+* `INRIA`
+    - `train`: 180 (dane są etykiety, trzeba ręcznie podzielić na train i val)
+    - `test`: 144 (brak etykiet)
+* `Dubai`
+    - `train`: 72 (dane są etykiety, trzeba ręcznie podzielić na train, val i test)
+* `Aerial Drone`
+    - `train`: 400 (dane są etykiety, trzeba ręcznie podzielić na train, val i test)
+* `UAVid`
+    - `train`: 200
+    - `val`: 70
+    - `test`: 10
+
 ## Problemy
 * model musi przyjmować dowolny (albo z dużego zbioru) rozmiar obrazka, a nie stały, bo datasety mają różne rozmiary obrazków, a nawet mogą być różne w ramach datasetu
 
@@ -61,6 +76,7 @@ Dobra, żeby zacząć już coś robić w projekcie, proponuję pójść w stron�
 ## Uwagi
 * ze względu na architekturę UNet, której używamy, ważne jest, żeby wymiary danych wejściowych były wielokrotnością 32 (zob. [ta funkcja](/src/datasets/utils/ResizeToDivisibleBy32.py))
 ![unet arch](assets/unet-arch.png)
+* w większości zbiorów danych, `groundtruth` jest zakodowane w postaci obrazków RGB, gdzie każdy kolor odpowiada innej klasie, trzeba je konwertować na tensor z etykietami, bo taki zwracają modele
 
 ## Materiały
 Wstępnie zebrałem trochę materiałów, proponuję od nich zacząć zapoznawanie się z rzeczami. Kolejne etapy projektu możemy spokojnie zrobić wcześniej niż termin i potem tylko oddawać
