@@ -35,6 +35,8 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
 | UNet      | :heavy_check_mark:       | TBA   | TBA   |  TBA   | 
 | UNet++   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
 
 
 ## Dane
