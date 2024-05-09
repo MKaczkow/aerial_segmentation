@@ -16,6 +16,7 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - [ ] dobre modele z Kaggle (po jednym dla każdego datasetu)
     - [ ] inne rzeczy warte uwagi
 - [ ] inne
+    - [ ] włączenie torch-lightning, żeby mieć logi i przebieg eksperymentów
     - [ ] *deep dive* UNet
     - [ ] dodanie wymiarów tensorów w annotacjach / *type hints*
     - [ ] (opcjonalnie) publikacja na Kaggle
@@ -31,6 +32,8 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 - [x] dokończenie prezentacji
 
 ## Modele
+
+### Bez finetune
 | Model      | INRIA | UAVid | Dubai | AerialDrone |  
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
 | UNet      | :heavy_check_mark:       | TBA   | TBA   |  TBA   | 
@@ -38,6 +41,31 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 | DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
 | DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
 
+## Wyniki
+
+### IoU
+
+### Bez finetune
+| Model      | INRIA | UAVid | Dubai | AerialDrone |  
+| ----------- | ----------- | ----------- | ----------- | ----------- |  
+| UNet      | 0.010615132      | TBA   | TBA   |  TBA   | 
+| UNet++   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+
+### Acc
+
+### Bez finetune
+| Model      | INRIA | UAVid | Dubai | AerialDrone |  
+| ----------- | ----------- | ----------- | ----------- | ----------- |  
+| UNet      | 0.8447621      | TBA   | TBA   |  TBA   | 
+| UNet++   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+
+### Misc
+* `UNet` - `INRIA` -  `no finetune`  
+{'iou': 0.010615132, 'f1': 0.020689072, 'accuracy': 0.8447621, 'recall': 0.0944909}
 
 ## Dane
 
