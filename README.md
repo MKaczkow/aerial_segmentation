@@ -5,17 +5,20 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
 ## TODO
-- [ ] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5])
-- [ ] tak samo w UAVid - dane są zakodowane, tak, żeby dało się je wyświetlić, a nie do modelu
-- [ ] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
-- [ ] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
+- [ ] problem konwersji danych RGB -> maska
+    - [ ] czy w AerialDrone używamy tylko maski z jednym kanałem czy kolorów z wieloma?
+    - [ ] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5])
+    - [ ] tak samo w UAVid - dane są zakodowane, tak, żeby dało się je wyświetlić, a nie do modelu
+    - [ ] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
+    - [ ] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
 - [ ] literatura
     - [ ] jakie jest SOTA w tym problemie? (top 5)
     - [ ] dobre modele z Kaggle (po jednym dla każdego datasetu)
     - [ ] inne rzeczy warte uwagi
-- [ ] (opcjonalnie) publikacja na Kaggle
-- [ ] dodanie wymiarów tensorów w annotacjach / *type hints*
-- [ ] *deep dive* UNet
+- [ ] inne
+    - [ ] *deep dive* UNet
+    - [ ] dodanie wymiarów tensorów w annotacjach / *type hints*
+    - [ ] (opcjonalnie) publikacja na Kaggle
 - [x] stworzenie funkcji ewaluacyjnej
 - [x] ile klas w UAVid?
 - [x] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
@@ -26,6 +29,13 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 - [x] zapoznanie z datasetem *Aerial Semantic Segmentation Drone Dataset*
 - [x] doinstalować torcha z CUDA (skill issue xd)
 - [x] dokończenie prezentacji
+
+## Modele
+| Model      | INRIA | UAVid | Dubai | AerialDrone |  
+| ----------- | ----------- | ----------- | ----------- | ----------- |  
+| UNet      | :heavy_check_mark:       | TBA   | TBA   |  TBA   | 
+| UNet++   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+
 
 ## Dane
 
@@ -64,6 +74,10 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 
 ## Problemy
 * model musi przyjmować dowolny (albo z dużego zbioru) rozmiar obrazka, a nie stały, bo datasety mają różne rozmiary obrazków, a nawet mogą być różne w ramach datasetu
+* w większości zbiorów danych, `groundtruth` jest zakodowane w postaci obrazków RGB, gdzie każdy kolor odpowiada innej klasie, trzeba je konwertować na tensor z etykietami, bo taki zwracają modele [related gh issue](https://github.com/qubvel/segmentation_models/issues/137)
+    - `UAVid` - maska ma 3 kanały, zapisane jako arbitralne wartości RGB
+    - `Aerial Drone` - maska ma 1 kanał, który potem jest jakoś przepisywany przy wyświetlaniu
+    - `Dubai` - maska ma 1 kanał, który potem jest jakoś przepisywany przy wyświetlaniu
 
 ## Prezka
 * opisane w [readme](./docs/README.md)
@@ -76,7 +90,6 @@ Dobra, żeby zacząć już coś robić w projekcie, proponuję pójść w stron�
 ## Uwagi
 * ze względu na architekturę UNet, której używamy, ważne jest, żeby wymiary danych wejściowych były wielokrotnością 32 (zob. [ta funkcja](/src/datasets/utils/ResizeToDivisibleBy32.py))
 ![unet arch](assets/unet-arch.png)
-* w większości zbiorów danych, `groundtruth` jest zakodowane w postaci obrazków RGB, gdzie każdy kolor odpowiada innej klasie, trzeba je konwertować na tensor z etykietami, bo taki zwracają modele
 
 ## Materiały
 Wstępnie zebrałem trochę materiałów, proponuję od nich zacząć zapoznawanie się z rzeczami. Kolejne etapy projektu możemy spokojnie zrobić wcześniej niż termin i potem tylko oddawać
