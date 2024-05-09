@@ -13,6 +13,7 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - [ ] dobre modele z Kaggle (po jednym dla każdego datasetu)
     - [ ] inne rzeczy warte uwagi
 - [ ] (opcjonalnie) publikacja na Kaggle
+- [ ] dodanie wymiarów tensorów w annotacjach / *type hints*
 - [x] ile klas w UAVid?
 - [x] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
 - [x] zapoznanie z libką *segmentation_models.pytorch*
