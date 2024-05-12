@@ -4,7 +4,7 @@ from typing import List, Tuple
 import torch
 from PIL import Image
 from torch.utils.data import Dataset
-from torchvision.transforms import ToTensor
+from torchvision.transforms import PILToTensor, ToTensor
 
 
 class INRIAAerialImageLabellingDataset(Dataset):
@@ -35,7 +35,7 @@ class INRIAAerialImageLabellingDataset(Dataset):
 
         if self.split != "test":
             gt = Image.open((self.gt_paths[index]))
-            torch_gt = ToTensor()(gt)
+            torch_gt = PILToTensor()(gt)
             if self.transforms is not None:
                 for transform in self.transforms:
                     torch_gt = transform(torch_gt)

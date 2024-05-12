@@ -50,7 +50,10 @@ Proponuję pójść w stronę przeglądu / ensemble różnych modeli i/lub datas
     - Vegetation: #FEDD3A
     - Water: #E2A929
     - Unlabeled: #9B9B9B     
-* `Aerial Drone`: 20 (tree, gras, other vegetation, dirt, gravel, rocks, water, paved area, pool, person, dog, car, bicycle, roof, wall, fence, fence-pole, window, door, obstacle) [source](https://www.kaggle.com/datasets/bulentsiyah/semantic-drone-dataset/data)
+* `Aerial Drone`: 20 (tree, gras, other vegetation, dirt, gravel, rocks, water, paved area, pool, person, dog, car, bicycle, roof, wall, fence, fence-pole, window, door, obstacle) [source](https://www.kaggle.com/datasets/bulentsiyah/semantic-drone-dataset/data) 
+> [!WARNING]  
+> Tak naprawdę, wygląda na to, że są 23 klasy.
+
 * `UAVid`: 8 [source](https://www.kaggle.com/code/alexalex02/semantic-segmentation-of-aerial-images)
     1. *building*: living houses, garages, skyscrapers, security booths, and buildings under construction.
     2. *road*: road or bridge surface that cars can run on legally. Parking lots are not included.

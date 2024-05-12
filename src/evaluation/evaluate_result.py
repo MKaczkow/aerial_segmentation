@@ -3,7 +3,10 @@ import torch
 
 
 def evaluate_result(
-    pred: torch.Tensor, target: torch.Tensor, mode: str = "binary"
+    pred: torch.Tensor,
+    target: torch.Tensor,
+    mode: str = "binary",
+    num_classes: int | None = None,
 ) -> dict:
     """Evaluate model output against target labels.
 
@@ -28,9 +31,17 @@ def evaluate_result(
             f"Mode {mode} not supported. Choose either 'binary' or 'multiclass'."
         )
 
-    tp, fp, fn, tn = smp.metrics.get_stats(
-        pred.squeeze().to("cpu").int(), target.squeeze().int(), mode=mode
-    )
+    if mode == "multiclass":
+        tp, fp, fn, tn = smp.metrics.get_stats(
+            pred.squeeze().to("cpu").int(),
+            target.squeeze().int(),
+            mode=mode,
+            num_classes=num_classes,
+        )
+    else:
+        tp, fp, fn, tn = smp.metrics.get_stats(
+            pred.squeeze().to("cpu").int(), target.squeeze().int(), mode=mode
+        )
 
     iou_score = smp.metrics.iou_score(tp, fp, fn, tn, reduction="micro")
     f1_score = smp.metrics.f1_score(tp, fp, fn, tn, reduction="micro")
