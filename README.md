@@ -102,6 +102,34 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - `val`: 70
     - `test`: 10
 
+### Wymiary wejściowych obrazków
+* `INRIA` - potrzebne *Resize*
+```python
+torch.Size([1, 3, 5024, 5024])
+torch.Size([1, 1, 5024, 5024])
+```
+
+* `Dubai` - nie ma potrzeby *Resize*
+```python
+torch.Size([1, 3, 544, 512])
+torch.Size([1, 1, 544, 512])
+```
+* `UAVid` - trzeba zrobić *Resize*, różne wymiary obrazków
+```python
+torch.Size([1, 3, 2176, 4096])
+torch.Size([1, 3, 2176, 4096])
+```
+albo 
+```python
+torch.Size([1, 3, 2176, 3840])
+torch.Size([1, 3, 2176, 3840])
+```
+* `Aerial Drone` - potrzebne *Resize*, możliwe, że są różne rozmiary obrazków w zbiorze
+```python
+torch.Size([1, 3, 4000, 6016])
+torch.Size([1, 1, 4000, 6016])
+```
+
 ## Problemy
 * model musi przyjmować dowolny (albo z dużego zbioru) rozmiar obrazka, a nie stały, bo datasety mają różne rozmiary obrazków, a nawet mogą być różne w ramach datasetu
 * w większości zbiorów danych, `groundtruth` jest zakodowane w postaci obrazków RGB, gdzie każdy kolor odpowiada innej klasie, trzeba je konwertować na tensor z etykietami, bo taki zwracają modele [related gh issue](https://github.com/qubvel/segmentation_models/issues/137)
