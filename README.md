@@ -5,6 +5,9 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
 ## TODO
+- [ ] trening na jednym datasecie + test na jednym datasecie
+- [ ] rescale (downsample) -> INRIA i może inne
+    - [ ] nie zepsuć maski - np. bilinear i progowanie niskim progiem (będzie mniejszy latent w UNet)
 - [ ] problem konwersji danych RGB -> maska
     - [ ] czy w AerialDrone używamy tylko maski z jednym kanałem czy kolorów z wieloma?
     - [ ] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5])
@@ -31,41 +34,10 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 - [x] doinstalować torcha z CUDA (skill issue xd)
 - [x] dokończenie prezentacji
 
-## Modele
-
-### Bez finetune
-| Model      | INRIA | UAVid | Dubai | AerialDrone |  
-| ----------- | ----------- | ----------- | ----------- | ----------- |  
-| UNet      | :heavy_check_mark:       | TBA   | TBA   |  TBA   | 
-| UNet++   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-
-## Wyniki
-
-### IoU
-
-### Bez finetune
-| Model      | INRIA | UAVid | Dubai | AerialDrone |  
-| ----------- | ----------- | ----------- | ----------- | ----------- |  
-| UNet      | 0.010615132      | TBA   | TBA   |  TBA   | 
-| UNet++   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-
-### Acc
-
-### Bez finetune
-| Model      | INRIA | UAVid | Dubai | AerialDrone |  
-| ----------- | ----------- | ----------- | ----------- | ----------- |  
-| UNet      | 0.8447621      | TBA   | TBA   |  TBA   | 
-| UNet++   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-
-### Misc
-* `UNet` - `INRIA` -  `no finetune`  
-{'iou': 0.010615132, 'f1': 0.020689072, 'accuracy': 0.8447621, 'recall': 0.0944909}
+## Intro
+Proponuję pójść w stronę przeglądu / ensemble różnych modeli i/lub datasetów, porównać, itd.
+* 'na zewnątrz' sprzedamy to jako właśnie taki przegląd, porównanie np. czy modele dobre dla zdj z satelitów, są dobre też dla zdj z dronów, biorąc też pod uwagę, np. koszt treningu / inferencji
+* 'do wewnątrz', czyli dla nas, to będzie po prostu zapoznanie się z aktualnym stanem dziedziny, nie będziemy wymyślać nowych rzeczy, jak na PBAD xd 
 
 ## Dane
 
@@ -130,6 +102,44 @@ torch.Size([1, 3, 4000, 6016])
 torch.Size([1, 1, 4000, 6016])
 ```
 
+## Modele
+
+### Bez finetune
+| Model      | INRIA | UAVid | Dubai | AerialDrone |  
+| ----------- | ----------- | ----------- | ----------- | ----------- |  
+| UNet      | :heavy_check_mark:       | TBA   | TBA   |  TBA   | 
+| UNet++   | :heavy_check_mark:        | TBA      | TBA      | TBA   | 
+| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+
+## Wyniki
+
+### IoU
+
+### Bez finetune
+| Model      | INRIA | UAVid | Dubai | AerialDrone |  
+| ----------- | ----------- | ----------- | ----------- | ----------- |  
+| UNet      | 0.0106      | TBA   | TBA   |  TBA   | 
+| UNet++   | 0.0146        | TBA      | TBA      | TBA   | 
+| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+
+### Acc
+
+### Bez finetune
+| Model      | INRIA | UAVid | Dubai | AerialDrone |  
+| ----------- | ----------- | ----------- | ----------- | ----------- |  
+| UNet      | 0.8448      | TBA   | TBA   |  TBA   | 
+| UNet++   | 0.9170        | TBA      | TBA      | TBA   | 
+| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+
+### Misc
+* `UNet` - `INRIA` -  `no finetune`  
+{'iou': 0.010615132, 'f1': 0.020689072, 'accuracy': 0.8447621, 'recall': 0.0944909}
+* `UNet++` - `INRIA` -  `no finetune`  
+{'iou': tensor(0.0146), 'f1': tensor(0.0289), 'accuracy': tensor(0.9170), 'recall': tensor(0.0147)}
+
 ## Problemy
 * model musi przyjmować dowolny (albo z dużego zbioru) rozmiar obrazka, a nie stały, bo datasety mają różne rozmiary obrazków, a nawet mogą być różne w ramach datasetu
 * w większości zbiorów danych, `groundtruth` jest zakodowane w postaci obrazków RGB, gdzie każdy kolor odpowiada innej klasie, trzeba je konwertować na tensor z etykietami, bo taki zwracają modele [related gh issue](https://github.com/qubvel/segmentation_models/issues/137)
@@ -139,11 +149,6 @@ torch.Size([1, 1, 4000, 6016])
 
 ## Prezka
 * opisane w [readme](./docs/README.md)
-
-## Intro
-Dobra, żeby zacząć już coś robić w projekcie, proponuję pójść w stronę przeglądu / ensemble różnych modeli i/lub datasetów, porównać, itd.
-* 'na zewnątrz' sprzedamy to jako właśnie taki przegląd, porównanie np. czy modele dobre dla zdj z satelitów, są dobre też dla zdj z dronów, biorąc też pod uwagę, np. koszt treningu / inferencji
-* 'do wewnątrz', czyli dla nas, to będzie po prostu zapoznanie się z aktualnym stanem dziedziny, nie będziemy wymyślać nowych rzeczy, jak na PBAD xd 
 
 ## Uwagi
 * ze względu na architekturę UNet, której używamy, ważne jest, żeby wymiary danych wejściowych były wielokrotnością 32 (zob. [ta funkcja](/src/datasets/utils/ResizeToDivisibleBy32.py))
