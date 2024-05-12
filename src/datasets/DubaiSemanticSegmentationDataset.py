@@ -4,7 +4,7 @@ from typing import List, Tuple
 import torch
 from PIL import Image
 from torch.utils.data import Dataset
-from torchvision.transforms import ToTensor
+from torchvision.transforms import PILToTensor, ToTensor
 
 
 class DubaiSemanticSegmentationDataset(Dataset):
@@ -28,7 +28,7 @@ class DubaiSemanticSegmentationDataset(Dataset):
         mask = Image.open((self.masks_paths[index]))
 
         torch_image = ToTensor()(image)
-        torch_mask = ToTensor()(mask)
+        torch_mask = PILToTensor()(mask)
 
         if self.transforms is not None:
             for transform in self.transforms:

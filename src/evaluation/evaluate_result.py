@@ -18,6 +18,8 @@ def evaluate_result(
     Args:
         pred (torch.Tensor): Model prediction tensor. Assuming shape (batch_size, num_classes, height, width).
         target (torch.Tensor): Target tensor.
+        mode (str, optional): Mode of evaluation. Defaults to "binary".
+        num_classes (int | None, optional): Number of classes, only needs to be provided if using "multiclass" mode. Defaults to None.
 
     Returns:
         dict: Dictionary containing evaluation metrics.

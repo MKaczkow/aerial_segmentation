@@ -5,24 +5,24 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
 ## TODO
-- [ ] trening na jednym datasecie + test na jednym datasecie
-- [ ] rescale (downsample) -> INRIA i może inne
-    - [ ] nie zepsuć maski - np. bilinear i progowanie niskim progiem (będzie mniejszy latent w UNet)
 - [ ] problem konwersji danych RGB -> maska
-    - [ ] czy w AerialDrone używamy tylko maski z jednym kanałem czy kolorów z wieloma?
-    - [ ] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5])
+    - [ ] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5]) - tu jest chyba jakiś bug, bo w notebooku `example-masks-conversion` wychodzi inaczej niż w `dubai-no-finetune`
     - [ ] tak samo w UAVid - dane są zakodowane, tak, żeby dało się je wyświetlić, a nie do modelu
-    - [ ] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
-    - [ ] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
+    - [x] czy w AerialDrone używamy tylko maski z jednym kanałem czy kolorów z wieloma?
+    - [x] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
+    - [x] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
+- [ ] trening na jednym datasecie + test na jednym datasecie
+- [ ] upewnienie się, że maski nie zostały (za bardzo) zaburzone - np. bilinear i progowanie niskim progiem (będzie mniejszy latent w UNet)
 - [ ] literatura
     - [ ] jakie jest SOTA w tym problemie? (top 5)
     - [ ] dobre modele z Kaggle (po jednym dla każdego datasetu)
     - [ ] inne rzeczy warte uwagi
 - [ ] inne
     - [ ] włączenie torch-lightning, żeby mieć logi i przebieg eksperymentów
-    - [ ] *deep dive* UNet
     - [ ] dodanie wymiarów tensorów w annotacjach / *type hints*
     - [ ] (opcjonalnie) publikacja na Kaggle
+- [x] *deep dive* UNet
+- [x] rescale (downsample) -> INRIA i może inne
 - [x] stworzenie funkcji ewaluacyjnej
 - [x] ile klas w UAVid?
 - [x] czy lepiej robić segmentację na podstawie jednego kanału czy trzech?
@@ -108,12 +108,13 @@ torch.Size([1, 1, 4000, 6016])
 ## Modele
 
 ### Bez finetune
+*sprawdzenie tylko czy się odpalają, tzn. model prawidłowo przetwarza dane, wyniki mogą być (is zazwyczaj są) bardzo słabe na początku*
 | Model      | INRIA | UAVid | Dubai | AerialDrone |  
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
-| UNet      | :heavy_check_mark:       | TBA   | TBA   |  TBA   | 
+| UNet      | :heavy_check_mark:       | TBA   | TBA   |  :heavy_check_mark:   | 
 | UNet++   | :heavy_check_mark:        | TBA      | TBA      | TBA   | 
-| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3   | :heavy_check_mark:        | TBA      | TBA      | TBA   | 
+| DeepLabV3+   | :heavy_check_mark:        | TBA      | TBA      | TBA   | 
 
 ## Wyniki
 
@@ -122,27 +123,34 @@ torch.Size([1, 1, 4000, 6016])
 ### Bez finetune
 | Model      | INRIA | UAVid | Dubai | AerialDrone |  
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
-| UNet      | 0.0106      | TBA   | TBA   |  TBA   | 
+| UNet      | 0.0106      | TBA   | TBA   |  0.0043   | 
 | UNet++   | 0.0146        | TBA      | TBA      | TBA   | 
-| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3   | TBA        | TBA      | TBA      | TBA   | 
+| DeepLabV3+   | TBA        | TBA      | TBA      | TBA   | 
 
 ### Acc
 
 ### Bez finetune
 | Model      | INRIA | UAVid | Dubai | AerialDrone |  
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
-| UNet      | 0.8448      | TBA   | TBA   |  TBA   | 
+| UNet      | 0.8448      | TBA   | TBA   |  0.9138   | 
 | UNet++   | 0.9170        | TBA      | TBA      | TBA   | 
-| DeepLabV3   | IN PROGRESS        | TBA      | TBA      | TBA   | 
-| DeepLabV3+   | IN PROGRESS        | TBA      | TBA      | TBA   | 
+| DeepLabV3   | TBA        | TBA      | TBA      | TBA   | 
+| DeepLabV3+   | TBA        | TBA      | TBA      | TBA   | 
 
 ### Misc
 * `UNet` - `INRIA` -  `no finetune`  
 {'iou': 0.010615132, 'f1': 0.020689072, 'accuracy': 0.8447621, 'recall': 0.0944909}
 * `UNet++` - `INRIA` -  `no finetune`  
 {'iou': tensor(0.0146), 'f1': tensor(0.0289), 'accuracy': tensor(0.9170), 'recall': tensor(0.0147)}
-
+* `Unet` - `Aerial Dron` - `no finetune`
+```
+Mean metrics
+iou 0.004345709
+f1 0.008359963
+accuracy 0.91377044
+recall 0.008359963
+```
 ## Problemy
 * model musi przyjmować dowolny (albo z dużego zbioru) rozmiar obrazka, a nie stały, bo datasety mają różne rozmiary obrazków, a nawet mogą być różne w ramach datasetu
 * w większości zbiorów danych, `groundtruth` jest zakodowane w postaci obrazków RGB, gdzie każdy kolor odpowiada innej klasie, trzeba je konwertować na tensor z etykietami, bo taki zwracają modele [related gh issue](https://github.com/qubvel/segmentation_models/issues/137)
