@@ -4,7 +4,8 @@ from typing import List, Tuple
 import torch
 from PIL import Image
 from torch.utils.data import Dataset
-from torchvision.transforms import ToTensor
+from torchvision.transforms import ToTensor, PILToTensor
+from src.datasets.utils.ConvertUAVidMasks import ConvertUAVidMasks
 
 
 class UAVidSemanticSegmentationDataset(Dataset):
@@ -36,8 +37,14 @@ class UAVidSemanticSegmentationDataset(Dataset):
                 torch_image = transform(torch_image)
 
         if self.split != "test":
+
             mask = Image.open((self.masks_paths[index]))
-            torch_mask = ToTensor()(mask)
+            pil_to_tensor_transform = PILToTensor()
+            torch_mask = pil_to_tensor_transform(mask)
+
+            convert_uavid_masks_transform = ConvertUAVidMasks()
+            torch_mask = convert_uavid_masks_transform(torch_mask).unsqueeze(0)
+
             if self.transforms is not None:
                 for transform in self.transforms:
                     torch_mask = transform(torch_mask)

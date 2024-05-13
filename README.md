@@ -5,12 +5,6 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
 ## TODO
-- [ ] problem konwersji danych RGB -> maska
-    - [ ] tak samo w UAVid - dane są zakodowane, tak, żeby dało się je wyświetlić, a nie do modelu
-    - [x] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5]) - tu jest chyba jakiś bug, bo w notebooku `example-masks-conversion` wychodzi inaczej niż w `dubai-no-finetune`
-    - [x] czy w AerialDrone używamy tylko maski z jednym kanałem czy kolorów z wieloma?
-    - [x] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
-    - [x] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
 - [ ] trening na jednym datasecie + test na jednym datasecie
 - [ ] użycie `Crop` lub `Pad` zamiast `Resize` - może będą lepsze wyniki?
 - [ ] upewnienie się, że maski nie zostały (za bardzo) zaburzone - np. bilinear i progowanie niskim progiem (będzie mniejszy latent w UNet)
@@ -34,6 +28,12 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 - [x] zapoznanie z datasetem *Aerial Semantic Segmentation Drone Dataset*
 - [x] doinstalować torcha z CUDA (skill issue xd)
 - [x] dokończenie prezentacji
+- [x] problem konwersji danych RGB -> maska
+    - [x] tak samo w UAVid - dane są zakodowane, tak, żeby dało się je wyświetlić, a nie do modelu
+    - [x] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5]) - tu jest chyba jakiś bug, bo w notebooku `example-masks-conversion` wychodzi inaczej niż w `dubai-no-finetune`
+    - [x] czy w AerialDrone używamy tylko maski z jednym kanałem czy kolorów z wieloma?
+    - [x] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
+    - [x] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
 
 ## Intro
 Proponuję pójść w stronę przeglądu / ensemble różnych modeli i/lub datasetów, porównać, itd.
@@ -112,10 +112,10 @@ torch.Size([1, 1, 4000, 6016])
 *sprawdzenie tylko czy się odpalają, tzn. model prawidłowo przetwarza dane, wyniki mogą być (is zazwyczaj są) bardzo słabe na początku*
 | Model      | INRIA | UAVid | Dubai | AerialDrone |  
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
-| UNet      | :heavy_check_mark:       | :heavy_check_mark:   | TBA   |  :heavy_check_mark:   | 
-| UNet++   | :heavy_check_mark:        | :heavy_check_mark:      | TBA      | :heavy_check_mark:   | 
-| DeepLabV3   | :heavy_check_mark:        | :heavy_check_mark:      | TBA      | :heavy_check_mark:   | 
-| DeepLabV3+   | :heavy_check_mark:        | :heavy_check_mark:      | TBA      | :heavy_check_mark:   | 
+| UNet      | :heavy_check_mark:       | :heavy_check_mark:   | :heavy_check_mark:   |  :heavy_check_mark:   | 
+| UNet++   | :heavy_check_mark:        | :heavy_check_mark:      | :heavy_check_mark:      | :heavy_check_mark:   | 
+| DeepLabV3   | :heavy_check_mark:        | :heavy_check_mark:      | :heavy_check_mark:      | :heavy_check_mark:   | 
+| DeepLabV3+   | :heavy_check_mark:        | :heavy_check_mark:      | :heavy_check_mark:      | :heavy_check_mark:   | 
 
 ## Wyniki
 
