@@ -24,16 +24,46 @@ class DubaiSemanticSegmentationDataset(Dataset):
 
     def __getitem__(self, index: int) -> Tuple[torch.Tensor, torch.Tensor]:
 
-        image = Image.open((self.image_paths[index]))
-        mask = Image.open((self.masks_paths[index]))
+        image = Image.open(self.image_paths[index])
+        print(self.masks_paths[index])
+        mask = Image.open(self.masks_paths[index], mode='P')
+        print(mask.size)
+        print(mask.mode)
+        print(mask.getextrema())
+        print(type(mask))
+
+        mask = mask.convert('P')
+        print(mask.size)
+        print(mask.mode)
+        print(mask.getextrema())
+        print(type(mask))
+        # for some weird reason, this is needed ^
 
         torch_image = ToTensor()(image)
-        torch_mask = PILToTensor()(mask)
+        pil_to_tensor_transform = PILToTensor()
+        torch_mask = pil_to_tensor_transform(mask)
+        # torch_mask = PILToTensor()(mask)
+
+        import numpy as np
+        print(type(torch_mask))
+        print(torch_mask.max())
+        print(torch_mask.min())
+        unique, counts = np.unique(torch_mask.to('cpu'), return_counts=True)
+        print(dict(zip(unique, counts)))
 
         if self.transforms is not None:
+            print("Transforming")
             for transform in self.transforms:
                 torch_image = transform(torch_image)
                 torch_mask = transform(torch_mask)
+        else:
+            print("No Transform")
+            
+        print(type(torch_mask))
+        print(torch_mask.max())
+        print(torch_mask.min())
+        unique, counts = np.unique(torch_mask.to('cpu'), return_counts=True)
+        print(dict(zip(unique, counts)))
 
         return (torch_image, torch_mask)
 

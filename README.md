@@ -12,6 +12,7 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - [x] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
     - [x] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
 - [ ] trening na jednym datasecie + test na jednym datasecie
+- [ ] użycie `Crop` lub `Pad` zamiast `Resize` - może będą lepsze wyniki?
 - [ ] upewnienie się, że maski nie zostały (za bardzo) zaburzone - np. bilinear i progowanie niskim progiem (będzie mniejszy latent w UNet)
 - [ ] literatura
     - [ ] jakie jest SOTA w tym problemie? (top 5)
