@@ -77,7 +77,7 @@ Proponuję pójść w stronę przeglądu / ensemble różnych modeli i/lub datas
     - `val`: 70
     - `test`: 10
 
-### Wymiary wejściowych obrazków
+### Wymiary wejściowych obrazków bez Resize
 * `INRIA` - potrzebne *Resize*
 ```python
 torch.Size([1, 3, 5024, 5024])
@@ -112,15 +112,16 @@ torch.Size([1, 1, 4000, 6016])
 | Model      | INRIA | UAVid | Dubai | AerialDrone |  
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
 | UNet      | :heavy_check_mark:       | TBA   | TBA   |  :heavy_check_mark:   | 
-| UNet++   | :heavy_check_mark:        | TBA      | TBA      | TBA   | 
-| DeepLabV3   | :heavy_check_mark:        | TBA      | TBA      | TBA   | 
-| DeepLabV3+   | :heavy_check_mark:        | TBA      | TBA      | TBA   | 
+| UNet++   | :heavy_check_mark:        | TBA      | TBA      | :heavy_check_mark:   | 
+| DeepLabV3   | :heavy_check_mark:        | TBA      | TBA      | :heavy_check_mark:   | 
+| DeepLabV3+   | :heavy_check_mark:        | TBA      | TBA      | :heavy_check_mark:   | 
 
 ## Wyniki
 
 ### IoU
 
 ### Bez finetune
+*wyniki bez finetune bardzo słabe, więc nie będą nawet wpisywane, TBA już przy normalnym treningu*
 | Model      | INRIA | UAVid | Dubai | AerialDrone |  
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
 | UNet      | 0.0106      | TBA   | TBA   |  0.0043   | 
@@ -131,6 +132,7 @@ torch.Size([1, 1, 4000, 6016])
 ### Acc
 
 ### Bez finetune
+*wyniki bez finetune bardzo słabe, więc nie będą nawet wpisywane, TBA już przy normalnym treningu*
 | Model      | INRIA | UAVid | Dubai | AerialDrone |  
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
 | UNet      | 0.8448      | TBA   | TBA   |  0.9138   | 
@@ -151,6 +153,7 @@ f1 0.008359963
 accuracy 0.91377044
 recall 0.008359963
 ```
+
 ## Problemy
 * model musi przyjmować dowolny (albo z dużego zbioru) rozmiar obrazka, a nie stały, bo datasety mają różne rozmiary obrazków, a nawet mogą być różne w ramach datasetu
 * w większości zbiorów danych, `groundtruth` jest zakodowane w postaci obrazków RGB, gdzie każdy kolor odpowiada innej klasie, trzeba je konwertować na tensor z etykietami, bo taki zwracają modele [related gh issue](https://github.com/qubvel/segmentation_models/issues/137)
