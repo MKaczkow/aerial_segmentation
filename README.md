@@ -6,8 +6,8 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 
 ## TODO
 - [ ] problem konwersji danych RGB -> maska
-    - [ ] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5]) - tu jest chyba jakiś bug, bo w notebooku `example-masks-conversion` wychodzi inaczej niż w `dubai-no-finetune`
     - [ ] tak samo w UAVid - dane są zakodowane, tak, żeby dało się je wyświetlić, a nie do modelu
+    - [x] rozwiązać problem ze sposobem w jaki jest zakodowane gt w Dubai (kolorowe obrazki zamiast po prostu [0...5]) - tu jest chyba jakiś bug, bo w notebooku `example-masks-conversion` wychodzi inaczej niż w `dubai-no-finetune`
     - [x] czy w AerialDrone używamy tylko maski z jednym kanałem czy kolorów z wieloma?
     - [x] w jaki sposób, w AerialDrone, jest oznaczane to co trzeba przewidzieć (RGB classes czy to drugie)?
     - [x] w AerialDrone, jak działa przetworzenie maski na tensor / PIL.Image (tzn. czy nie ma np. jakiegoś rescale, itd.)?
@@ -112,10 +112,10 @@ torch.Size([1, 1, 4000, 6016])
 *sprawdzenie tylko czy się odpalają, tzn. model prawidłowo przetwarza dane, wyniki mogą być (is zazwyczaj są) bardzo słabe na początku*
 | Model      | INRIA | UAVid | Dubai | AerialDrone |  
 | ----------- | ----------- | ----------- | ----------- | ----------- |  
-| UNet      | :heavy_check_mark:       | TBA   | TBA   |  :heavy_check_mark:   | 
-| UNet++   | :heavy_check_mark:        | TBA      | TBA      | :heavy_check_mark:   | 
-| DeepLabV3   | :heavy_check_mark:        | TBA      | TBA      | :heavy_check_mark:   | 
-| DeepLabV3+   | :heavy_check_mark:        | TBA      | TBA      | :heavy_check_mark:   | 
+| UNet      | :heavy_check_mark:       | :heavy_check_mark:   | TBA   |  :heavy_check_mark:   | 
+| UNet++   | :heavy_check_mark:        | :heavy_check_mark:      | TBA      | :heavy_check_mark:   | 
+| DeepLabV3   | :heavy_check_mark:        | :heavy_check_mark:      | TBA      | :heavy_check_mark:   | 
+| DeepLabV3+   | :heavy_check_mark:        | :heavy_check_mark:      | TBA      | :heavy_check_mark:   | 
 
 ## Wyniki
 

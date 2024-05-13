@@ -5,6 +5,7 @@ import torch
 from PIL import Image
 from torch.utils.data import Dataset
 from torchvision.transforms import PILToTensor, ToTensor
+from src.datasets.utils.ConvertDubaiMasks import ConvertDubaiMasks
 
 
 class DubaiSemanticSegmentationDataset(Dataset):
@@ -25,46 +26,23 @@ class DubaiSemanticSegmentationDataset(Dataset):
     def __getitem__(self, index: int) -> Tuple[torch.Tensor, torch.Tensor]:
 
         image = Image.open(self.image_paths[index])
-        print(self.masks_paths[index])
-        mask = Image.open(self.masks_paths[index], mode='P')
-        print(mask.size)
-        print(mask.mode)
-        print(mask.getextrema())
-        print(type(mask))
+        mask = Image.open(self.masks_paths[index])
 
-        mask = mask.convert('P')
-        print(mask.size)
-        print(mask.mode)
-        print(mask.getextrema())
-        print(type(mask))
-        # for some weird reason, this is needed ^
-
-        torch_image = ToTensor()(image)
         pil_to_tensor_transform = PILToTensor()
         torch_mask = pil_to_tensor_transform(mask)
-        # torch_mask = PILToTensor()(mask)
 
-        import numpy as np
-        print(type(torch_mask))
-        print(torch_mask.max())
-        print(torch_mask.min())
-        unique, counts = np.unique(torch_mask.to('cpu'), return_counts=True)
-        print(dict(zip(unique, counts)))
+        if mask.mode != 'P':
+            convert_dubai_masks_transform = ConvertDubaiMasks()
+            torch_mask = convert_dubai_masks_transform(torch_mask).unsqueeze(0)
+
+        to_tensor_transform = ToTensor()
+        torch_image = to_tensor_transform(image)
 
         if self.transforms is not None:
-            print("Transforming")
             for transform in self.transforms:
                 torch_image = transform(torch_image)
                 torch_mask = transform(torch_mask)
-        else:
-            print("No Transform")
-            
-        print(type(torch_mask))
-        print(torch_mask.max())
-        print(torch_mask.min())
-        unique, counts = np.unique(torch_mask.to('cpu'), return_counts=True)
-        print(dict(zip(unique, counts)))
-
+        
         return (torch_image, torch_mask)
 
     def _get_paths(self) -> Tuple[List[str], List[str]]:
