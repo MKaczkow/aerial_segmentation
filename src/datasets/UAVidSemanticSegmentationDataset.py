@@ -4,7 +4,8 @@ from typing import List, Tuple
 import torch
 from PIL import Image
 from torch.utils.data import Dataset
-from torchvision.transforms import ToTensor, PILToTensor
+from torchvision.transforms import PILToTensor, ToTensor
+
 from src.datasets.utils.ConvertUAVidMasks import ConvertUAVidMasks
 
 

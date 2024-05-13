@@ -10,12 +10,12 @@ class ConvertDubaiMasks(Module):
             self.color_classes_dict = color_classes_dict
         else:
             self.color_classes_dict = {
-                (60, 17, 152): 0,   # Building
+                (60, 17, 152): 0,  # Building
                 (132, 41, 246): 1,  # Land (unpaved area)
                 (110, 193, 228): 2,  # Road
                 (254, 221, 58): 3,  # Vegetation
                 (226, 169, 41): 4,  # Water
-                (155, 155, 155): 5  # Unlabeled
+                (155, 155, 155): 5,  # Unlabeled
             }
 
     def __call__(self, tensor: torch.Tensor) -> torch.Tensor:
@@ -29,11 +29,11 @@ class ConvertDubaiMasks(Module):
         numpy_array = torch.permute(tensor, (1, 2, 0)).cpu().numpy()
 
         # Convert the image pixels using the color classes dictionary
-        p_image_pixels = [map_to_class(rgb)
-                          for rgb in numpy_array.reshape(-1, 3)]
+        p_image_pixels = [map_to_class(rgb) for rgb in numpy_array.reshape(-1, 3)]
 
         # Convert list to tensor
         p_tensor = torch.tensor(p_image_pixels, dtype=torch.uint8).reshape(
-            tensor.size(1), tensor.size(2))
+            tensor.size(1), tensor.size(2)
+        )
 
         return p_tensor

@@ -5,6 +5,7 @@ import torch
 from PIL import Image
 from torch.utils.data import Dataset
 from torchvision.transforms import PILToTensor, ToTensor
+
 from src.datasets.utils.ConvertDubaiMasks import ConvertDubaiMasks
 
 
@@ -31,7 +32,7 @@ class DubaiSemanticSegmentationDataset(Dataset):
         pil_to_tensor_transform = PILToTensor()
         torch_mask = pil_to_tensor_transform(mask)
 
-        if mask.mode != 'P':
+        if mask.mode != "P":
             convert_dubai_masks_transform = ConvertDubaiMasks()
             torch_mask = convert_dubai_masks_transform(torch_mask).unsqueeze(0)
 
@@ -42,7 +43,7 @@ class DubaiSemanticSegmentationDataset(Dataset):
             for transform in self.transforms:
                 torch_image = transform(torch_image)
                 torch_mask = transform(torch_mask)
-        
+
         return (torch_image, torch_mask)
 
     def _get_paths(self) -> Tuple[List[str], List[str]]:
