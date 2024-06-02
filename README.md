@@ -51,7 +51,8 @@ Proponuję pójść w stronę przeglądu / ensemble różnych modeli i/lub datas
     - Vegetation: #FEDD3A
     - Water: #E2A929
     - Unlabeled: #9B9B9B     
-* `Aerial Drone`: 20 (tree, gras, other vegetation, dirt, gravel, rocks, water, paved area, pool, person, dog, car, bicycle, roof, wall, fence, fence-pole, window, door, obstacle) [source](https://www.kaggle.com/datasets/bulentsiyah/semantic-drone-dataset/data) 
+* `Aerial Drone`: 20 (tree, gras, other vegetation, dirt, gravel, rocks, water, paved area, pool, person, dog, car, bicycle, roof, wall, fence, fence-pole, window, door, obstacle) [source](https://www.kaggle.com/datasets/bulentsiyah/semantic-drone-dataset/data)   
+
 > [!WARNING]  
 > Tak naprawdę, wygląda na to, że są 23 klasy.
 
@@ -168,6 +169,11 @@ recall 0.008359963
 ## Uwagi
 * ze względu na architekturę UNet, której używamy, ważne jest, żeby wymiary danych wejściowych były wielokrotnością 32 (zob. [ta funkcja](/src/datasets/utils/ResizeToDivisibleBy32.py))
 ![unet arch](assets/unet-arch.png)
+
+> [!WARNING]  
+> W przypadku `Resize` trzeba uważać na wybrany interpolant, bo może zaburzyć maskę, np. `BILINEAR` zaburza maskę, bo robi wartości zmiennoprzecinkowe, które potem trzeba progować, a `NEAREST` i `NEAREST_EXACT` (chyba) nie zaburzają.
+
+* problem z `runtimeerror: element 0 of tensors does not require grad and does not have a grad_fn` - trzeba zwrócić uwagę na to, żeby nie próbować robić `backward` na tensorach, które nie wymagają `grad` (np. maski, które są `int`), często po prostu dodanie `.float()` (konwersja do float) lub `loss.required_grad=True` ('wymuszenie' gradientu) rozwiązuje problem, zobacz [SO post](https://stackoverflow.com/questions/61808965/pytorch-runtimeerror-element-0-of-tensors-does-not-require-grad-and-does-not-ha)
 
 ## Materiały
 Wstępnie zebrałem trochę materiałów, proponuję od nich zacząć zapoznawanie się z rzeczami. Kolejne etapy projektu możemy spokojnie zrobić wcześniej niż termin i potem tylko oddawać
