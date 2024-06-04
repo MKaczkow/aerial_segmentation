@@ -13,7 +13,7 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - [ ] dobre modele z Kaggle (po jednym dla każdego datasetu)
     - [ ] inne rzeczy warte uwagi
 - [ ] inne
-    - [ ] włączenie torch-lightning, żeby mieć logi i przebieg eksperymentów
+    - [x] włączenie torch-lightning, żeby mieć logi i przebieg eksperymentów
     - [ ] dodanie wymiarów tensorów w annotacjach / *type hints*
     - [ ] (opcjonalnie) publikacja na Kaggle
 - [x] *deep dive* UNet
@@ -37,8 +37,6 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 
 ## Intro
 Proponuję pójść w stronę przeglądu / ensemble różnych modeli i/lub datasetów, porównać, itd.
-* 'na zewnątrz' sprzedamy to jako właśnie taki przegląd, porównanie np. czy modele dobre dla zdj z satelitów, są dobre też dla zdj z dronów, biorąc też pod uwagę, np. koszt treningu / inferencji
-* 'do wewnątrz', czyli dla nas, to będzie po prostu zapoznanie się z aktualnym stanem dziedziny, nie będziemy wymyślać nowych rzeczy, jak na PBAD xd 
 
 ## Dane
 
