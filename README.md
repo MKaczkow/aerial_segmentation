@@ -173,9 +173,14 @@ recall 0.008359963
 
 * problem z `runtimeerror: element 0 of tensors does not require grad and does not have a grad_fn` - trzeba zwrócić uwagę na to, żeby nie próbować robić `backward` na tensorach, które nie wymagają `grad` (np. maski, które są `int`), często po prostu dodanie `.float()` (konwersja do float) lub `loss.required_grad=True` ('wymuszenie' gradientu) rozwiązuje problem, zobacz [SO post](https://stackoverflow.com/questions/61808965/pytorch-runtimeerror-element-0-of-tensors-does-not-require-grad-and-does-not-ha)
 
-## Materiały
-Wstępnie zebrałem trochę materiałów, proponuję od nich zacząć zapoznawanie się z rzeczami. Kolejne etapy projektu możemy spokojnie zrobić wcześniej niż termin i potem tylko oddawać
+* problem z `smp.losses.JaccardLoss` jest związany z [github discussion](https://github.com/qubvel/segmentation_models.pytorch/discussions/454) i nadal nie został rozwiązany
 
+> [!WARNING]  
+> Chyba lepiej nie używać `smp.losses.JaccardLoss`.  
+
+[Ten docs](https://pytorch.org/docs/stable/generated/torch.nn.functional.one_hot.html) i [ten post SO](https://stackoverflow.com/questions/66543659/one-hot-encoding-in-pytorch) pomagają rozwiązać problem, choć dziwne, że akurat `torch.LongTensor` jest wymagany w `one_hot`
+
+## Materiały
 * repozytoria
     * [praca z INRIA dataset](https://github.com/margokhokhlova/aerial_segmentation)
     * [praca z Aerial Image Segmentation from Online Maps](https://github.com/alpemek/aerial-segmentation/tree/master)

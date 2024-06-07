@@ -4,6 +4,8 @@ pandas
 patchify
 pytorch-lightning
 segmentation-models-pytorch
-torch
-torchvision
 tensorboard
+
+# for torch and torchvision: https://pytorch.org/get-started/locally/
+# torch
+# torchvision

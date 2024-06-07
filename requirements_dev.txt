@@ -9,7 +9,12 @@ patchify
 pytorch-lightning
 seaborn
 segmentation-models-pytorch
-torch
-torchvision
+# torch
+# torchvision
 tensorboard
 wandb
+
+
+# for torch and torchvision: https://pytorch.org/get-started/locally/
+# torch
+# torchvision
