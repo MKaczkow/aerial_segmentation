@@ -14,6 +14,9 @@ DRAFT.ipynb
 # outputs
 OLD_random_model_output
 OLD_trained_output_images
+outputs
+random_model_output
+results 
 
 # model checkpoints
 checkpoints

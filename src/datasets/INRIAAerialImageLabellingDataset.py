@@ -4,21 +4,24 @@ from typing import List, Tuple
 import torch
 from PIL import Image
 from torch.utils.data import Dataset
-from torchvision.transforms import PILToTensor, ToTensor
+from torchvision.transforms import PILToTensor, ToTensor, RandomCrop
+import torchvision.transforms.functional as TF
 
 
 class INRIAAerialImageLabellingDataset(Dataset):
 
-    def __init__(self, root_path, transforms=None, split="train") -> None:
+    def __init__(
+        self, root_path, transforms=None, split="train", image_size: int = 576
+    ) -> None:
         self.root_path = root_path
         self.split = split
+        self.image_size = image_size
 
         if split not in ["train", "test"]:
             raise ValueError("split must be one of [train, test]")
 
         self.root_path = os.path.join(root_path, split)
         self.transforms = transforms
-        print(self.root_path)
         self.image_paths, self.gt_paths = self._get_paths()
 
     def __len__(self) -> int:
@@ -31,14 +34,30 @@ class INRIAAerialImageLabellingDataset(Dataset):
 
         if self.transforms is not None:
             for transform in self.transforms:
-                torch_image = transform(torch_image)
+                # apply transforms to both images simultaneously,
+                # so that random transforms (like RandomCrop) are consistent
+                # https://discuss.pytorch.org/t/how-to-apply-same-transform-on-a-pair-of-picture/14914/3?u=ssgosh
+                if isinstance(transform, RandomCrop):
+                    i, j, h, w = transform.get_params(
+                        torch_image, output_size=(self.image_size, self.image_size)
+                    )
+                    torch_image = TF.crop(torch_image, i, j, h, w)
+                else:
+                    torch_image = transform(torch_image)
 
         if self.split != "test":
             gt = Image.open((self.gt_paths[index]))
             torch_gt = PILToTensor()(gt)
+
             if self.transforms is not None:
                 for transform in self.transforms:
-                    torch_gt = transform(torch_gt)
+                    # apply transforms to both images simultaneously,
+                    # if random transforms (like RandomCrop) are used
+                    # else apply transforms normally
+                    if isinstance(transform, RandomCrop):
+                        torch_gt = TF.crop(torch_gt, i, j, h, w)
+                    else:
+                        torch_gt = transform(torch_gt)
 
             return (torch_image, torch_gt)
 
