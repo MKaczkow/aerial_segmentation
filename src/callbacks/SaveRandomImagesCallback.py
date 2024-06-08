@@ -30,6 +30,10 @@ class SaveRandomImagesCallback(Callback):
         image = image.cpu().numpy().transpose(1, 2, 0)
         mask = mask.cpu().numpy()
 
+        # for Dubai dataset (and possibly others, with non-binary problem)
+        if pred.shape[1] > 1:
+            pred = pred.argmax(dim=1)
+
         fig, ax = plt.subplots(1, 3)
         ax[0].imshow(image)
         ax[0].set_title("Image")
