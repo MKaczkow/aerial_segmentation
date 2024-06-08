@@ -17,7 +17,7 @@ class SaveTestPreds(Callback):
 
         num_samples = min(self.num_samples, len(images))
 
-        for i in range(num_samples):
+        for _ in range(num_samples):
             idx = random.randint(0, len(images) - 1)
             image = images[idx]
             pred = pl_module(image.unsqueeze(0))

@@ -34,7 +34,7 @@ class SaveRandomImagesCallback(Callback):
         if pred.shape[1] > 1:
             pred = pred.argmax(dim=1)
 
-        fig, ax = plt.subplots(1, 3)
+        _, ax = plt.subplots(1, 3)
         ax[0].imshow(image)
         ax[0].set_title("Image")
         ax[0].axis("off")
