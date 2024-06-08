@@ -11,6 +11,18 @@ venv/
 # drafts
 DRAFT.ipynb
 
+# outputs
+OLD_random_model_output
+OLD_trained_output_images
+
+# model checkpoints
+checkpoints
+*.pth
+
+# metrics
+metrics
+*.json
+
 # data
 data/DubaiSemanticSegmentationDataset/**/*.png
 data/DubaiSemanticSegmentationDataset/**/*.jpg

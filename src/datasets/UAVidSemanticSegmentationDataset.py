@@ -2,18 +2,29 @@ import os
 from typing import List, Tuple
 
 import torch
+import torchvision.transforms.functional as TF
 from PIL import Image
 from torch.utils.data import Dataset
-from torchvision.transforms import PILToTensor, ToTensor
+from torchvision.transforms import PILToTensor, RandomCrop, ToTensor
 
 from src.datasets.utils.ConvertUAVidMasks import ConvertUAVidMasks
 
 
 class UAVidSemanticSegmentationDataset(Dataset):
+    """UAVID dataset for semantic segmentation."""
 
-    def __init__(self, root_path, transforms=None, split="train") -> None:
+    def __init__(
+        self,
+        root_path,
+        transforms=None,
+        split: str = "train",
+        image_height: int = 576,
+        image_width: int = 1024,
+    ) -> None:
         self.root_path = root_path
         self.split = split
+        self.image_height = image_height
+        self.image_width = image_width
 
         if split not in ["train", "valid", "test"]:
             raise ValueError("split must be one of [train, valid, test]")
@@ -35,7 +46,16 @@ class UAVidSemanticSegmentationDataset(Dataset):
 
         if self.transforms is not None:
             for transform in self.transforms:
-                torch_image = transform(torch_image)
+                # apply transforms to both images simultaneously,
+                # so that random transforms (like RandomCrop) are consistent
+                # https://discuss.pytorch.org/t/how-to-apply-same-transform-on-a-pair-of-picture/14914/3?u=ssgosh
+                if isinstance(transform, RandomCrop):
+                    i, j, h, w = transform.get_params(
+                        torch_image, output_size=(self.image_height, self.image_width)
+                    )
+                    torch_image = TF.crop(torch_image, i, j, h, w)
+                else:
+                    torch_image = transform(torch_image)
 
         if self.split != "test":
 
@@ -48,7 +68,13 @@ class UAVidSemanticSegmentationDataset(Dataset):
 
             if self.transforms is not None:
                 for transform in self.transforms:
-                    torch_mask = transform(torch_mask)
+                    # apply transforms to both images simultaneously,
+                    # if random transforms (like RandomCrop) are used
+                    # else apply transforms normally
+                    if isinstance(transform, RandomCrop):
+                        torch_mask = TF.crop(torch_mask, i, j, h, w)
+                    else:
+                        torch_mask = transform(torch_mask)
 
             return (torch_image, torch_mask)
 
