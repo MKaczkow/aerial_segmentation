@@ -14,8 +14,8 @@ class AerialDroneSemanticSegmentationDataset(Dataset):
         self,
         root_path,
         transforms=None,
-        image_height: int = 400,
-        image_width: int = 600,
+        image_height: int = 416,
+        image_width: int = 608,
     ) -> None:
         self.root_path = root_path
         self.transforms = transforms
@@ -45,8 +45,10 @@ class AerialDroneSemanticSegmentationDataset(Dataset):
                         torch_image, output_size=(self.image_height, self.image_width)
                     )
                     torch_image = TF.crop(torch_image, i, j, h, w)
+                    torch_mask = TF.crop(torch_mask, i, j, h, w)
                 else:
                     torch_image = transform(torch_image)
+                    torch_mask = transform(torch_mask)
 
         return (torch_image, torch_mask)
 

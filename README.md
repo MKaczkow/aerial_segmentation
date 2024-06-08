@@ -5,6 +5,9 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
 ## TODO
+- [ ] przygotowanie wstępne ('pocięcie' obrazków) w większych datasetach
+    - [ ] UAVid
+    - [ ] INRIA
 - [ ] trening na jednym datasecie + test na jednym datasecie
 - [ ] użycie `Crop` lub `Pad` zamiast `Resize` - może będą lepsze wyniki?
 - [ ] upewnienie się, że maski nie zostały (za bardzo) zaburzone - np. bilinear i progowanie niskim progiem (będzie mniejszy latent w UNet)

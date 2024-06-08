@@ -4,7 +4,7 @@ import os
 import matplotlib.pyplot as plt
 
 
-class SaveTestPredsDubai(Callback):
+class SaveTestPredsMulticlass(Callback):
     def __init__(self, save_dir, num_samples=4):
         super().__init__()
         self.save_dir = save_dir
