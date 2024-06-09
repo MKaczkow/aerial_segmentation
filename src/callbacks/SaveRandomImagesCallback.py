@@ -1,7 +1,8 @@
-from pytorch_lightning.callbacks import Callback
-import random
 import os
+import random
+
 import matplotlib.pyplot as plt
+from pytorch_lightning.callbacks import Callback
 
 
 class SaveRandomImagesCallback(Callback):

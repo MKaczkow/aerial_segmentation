@@ -5,7 +5,7 @@ import torch
 import torchvision.transforms.functional as TF
 from PIL import Image
 from torch.utils.data import Dataset
-from torchvision.transforms import PILToTensor, ToTensor, RandomCrop
+from torchvision.transforms import PILToTensor, RandomCrop, ToTensor
 
 
 class AerialDroneSemanticSegmentationDataset(Dataset):

@@ -1,7 +1,8 @@
-from pytorch_lightning.callbacks import Callback
-import random
 import os
+import random
+
 import matplotlib.pyplot as plt
+from pytorch_lightning.callbacks import Callback
 
 
 class SaveTestPredsMulticlass(Callback):
@@ -14,9 +15,9 @@ class SaveTestPredsMulticlass(Callback):
     def on_test_epoch_end(self, trainer, pl_module):
         batch = next(iter(trainer.test_dataloaders))
         images, masks = batch
-        print('images')
+        print("images")
         print(images.shape)
-        print('masks')
+        print("masks")
         print(masks.shape)
 
         num_samples = min(self.num_samples, len(images))
@@ -25,7 +26,7 @@ class SaveTestPredsMulticlass(Callback):
             idx = random.randint(0, len(images) - 1)
             image, mask = images[idx], masks[idx]
             pred = pl_module(image.unsqueeze(0))
-            print('pred')
+            print("pred")
             print(pred.shape)
 
             self.save_image_mask_pred(image, mask, pred, trainer.current_epoch, idx)
