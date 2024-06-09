@@ -27,6 +27,7 @@ metrics
 *.json
 
 # data
+test_patch
 **/image_patches
 **/mask_patches
 data/DubaiSemanticSegmentationDataset/**/*.png

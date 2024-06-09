@@ -7,7 +7,8 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 ## TODO
 - [ ] przygotowanie wstępne ('pocięcie' obrazków) w większych datasetach
     - [ ] UAVid
-    - [ ] INRIA
+        - [ ] debug
+    - [x] INRIA
 - [ ] trening na jednym datasecie + test na jednym datasecie
 - [ ] użycie `Crop` lub `Pad` zamiast `Resize` - może będą lepsze wyniki?
 - [ ] upewnienie się, że maski nie zostały (za bardzo) zaburzone - np. bilinear i progowanie niskim progiem (będzie mniejszy latent w UNet)
