@@ -63,6 +63,7 @@
 * duże dane [5000, 5000], itp.
 * .tif
 * długi czas treningu
+* maski
 
 ## Co pomogło
 * podział na małe kawałki [500, 500]
