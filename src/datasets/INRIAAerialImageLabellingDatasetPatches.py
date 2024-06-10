@@ -36,12 +36,12 @@ class INRIAAerialImageLabellingDatasetPatches(Dataset):
                 torch_image = transform(torch_image)
 
         if self.split != "test":
-            gt = Image.open((self.gt_paths[index]))
+            gt = Image.open((self.gt_paths[index])).convert("L")
             torch_gt = PILToTensor()(gt)
 
             if self.transforms is not None:
                 for transform in self.transforms:
-                    torch_gt = transform(torch_gt)
+                    torch_gt = transform(torch_gt)       
 
             return (torch_image, torch_gt)
 

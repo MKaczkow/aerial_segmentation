@@ -40,9 +40,8 @@ class DubaiSemanticSegmentationDataset(Dataset):
         torch_image = to_tensor_transform(image)
 
         if self.transforms is not None:
-            for transform in self.transforms:
-                torch_image = transform(torch_image)
-                torch_mask = transform(torch_mask)
+            torch_image = self.transforms(torch_image)
+            torch_mask = self.transforms(torch_mask)
 
         return (torch_image, torch_mask)
 

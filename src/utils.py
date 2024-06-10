@@ -2,9 +2,9 @@ import csv
 import os
 
 import numpy as np
-from PIL import Image
 import torch
 import torch.nn.functional as F
+from PIL import Image
 from torchvision.utils import save_image
 
 
@@ -66,6 +66,7 @@ def save_patch_inria(patch, path, prefix, index):
     filename = os.path.join(path, f"{prefix}_{index}.png")
     save_image(patch, filename)
 
+
 def save_patch_uavid(patch, path, prefix, index):
     os.makedirs(path, exist_ok=True)
     filename = os.path.join(path, f"{prefix}_{index}.png")
@@ -79,6 +80,7 @@ def save_patch_uavid(patch, path, prefix, index):
     print(dict(zip(unique, counts)))
     print()
     Image.fromarray(array.squeeze()).save(filename)
+
 
 def pad_to_patch_size(image, mask, patch_size):
     _, img_height, img_width = image.shape
@@ -105,7 +107,7 @@ def slice_and_save_uavid(
     image_save_path="image_patches",
     mask_save_path="mask_patches",
     prefix="patch",
-    train=True, 
+    train=True,
 ):
     # Pad image and mask to ensure they can be evenly divided into patches
     print("slice and save uavid")
@@ -119,7 +121,7 @@ def slice_and_save_uavid(
     print(mask.dtype)
     unique, counts = torch.unique(mask, return_counts=True)
     print(dict(zip(unique, counts)))
-    
+
     if train:
         image, mask = pad_to_patch_size(image, mask, patch_size)
         print("mask after padding")
@@ -158,7 +160,9 @@ def slice_and_save_uavid(
 
             # Save the patches
             # not a mistake, just handle normal data
-            save_patch_inria(image_patch, image_save_path, f"{prefix}_image", patch_index)
+            save_patch_inria(
+                image_patch, image_save_path, f"{prefix}_image", patch_index
+            )
             if train:
                 print("mask_patch")
                 print(type(mask_patch))
@@ -167,7 +171,9 @@ def slice_and_save_uavid(
                 unique, counts = torch.unique(mask_patch, return_counts=True)
                 print(dict(zip(unique, counts)))
                 print()
-                save_patch_uavid(mask_patch, mask_save_path, f"{prefix}_mask", patch_index)
+                save_patch_uavid(
+                    mask_patch, mask_save_path, f"{prefix}_mask", patch_index
+                )
 
             patch_index += 1
 
@@ -212,9 +218,13 @@ def slice_and_save_inria(
                 mask_patch = mask[:, start_h:end_h, start_w:end_w]
 
             # Save the patches
-            save_patch_inria(image_patch, image_save_path, f"{prefix}_image", patch_index)
+            save_patch_inria(
+                image_patch, image_save_path, f"{prefix}_image", patch_index
+            )
             if train:
-                save_patch_inria(mask_patch, mask_save_path, f"{prefix}_mask", patch_index)
+                save_patch_inria(
+                    mask_patch, mask_save_path, f"{prefix}_mask", patch_index
+                )
 
             patch_index += 1
 

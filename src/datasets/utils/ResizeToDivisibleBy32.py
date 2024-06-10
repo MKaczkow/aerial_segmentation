@@ -1,5 +1,5 @@
 from torch.nn import Module
-from torchvision.transforms import Resize
+from torchvision.transforms import InterpolationMode, Resize
 
 
 class ResizeToDivisibleBy32(Module):
@@ -13,5 +13,7 @@ class ResizeToDivisibleBy32(Module):
         new_height = (height + 31) // 32 * 32
         new_width = (width + 31) // 32 * 32
 
-        transform = Resize([new_height, new_width])
+        transform = Resize(
+            [new_height, new_width], interpolation=InterpolationMode.NEAREST_EXACT
+        )
         return transform(tensor)

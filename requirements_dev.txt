@@ -13,7 +13,7 @@ segmentation-models-pytorch
 # torchvision
 tensorboard
 wandb
-
+rastervision
 
 # for torch and torchvision: https://pytorch.org/get-started/locally/
 # torch

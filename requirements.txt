@@ -5,6 +5,7 @@ patchify
 pytorch-lightning
 segmentation-models-pytorch
 tensorboard
+rastervision
 
 # for torch and torchvision: https://pytorch.org/get-started/locally/
 # torch

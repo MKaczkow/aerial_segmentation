@@ -9,6 +9,15 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - [ ] UAVid
         - [ ] debug
     - [x] INRIA
+- [ ] RETRO
+    - kanały, konwersja, etc. w PIL
+    - wymiary obrazków, przemyslenie tego na etapie wejścia
+    - rastervision
+    - rasterio
+    - funkcja straty 'na kartce' (upewnić się co i jak dokładnie działa, f straty 
+    zawsze min. i tak dalej)
+    - Compose zamiast for transform in self.transforms
+    - ... 
 - [ ] trening na jednym datasecie + test na jednym datasecie
 - [ ] użycie `Crop` lub `Pad` zamiast `Resize` - może będą lepsze wyniki?
 - [ ] upewnienie się, że maski nie zostały (za bardzo) zaburzone - np. bilinear i progowanie niskim progiem (będzie mniejszy latent w UNet)
