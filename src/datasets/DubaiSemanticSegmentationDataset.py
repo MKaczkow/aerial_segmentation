@@ -2,9 +2,10 @@ import os
 from typing import List, Tuple
 
 import torch
+import torchvision.transforms.functional as TF
 from PIL import Image
 from torch.utils.data import Dataset
-from torchvision.transforms import PILToTensor, ToTensor
+from torchvision.transforms import PILToTensor, ToTensor, RandomCrop
 
 from src.datasets.utils.ConvertDubaiMasks import ConvertDubaiMasks
 
@@ -40,8 +41,18 @@ class DubaiSemanticSegmentationDataset(Dataset):
         torch_image = to_tensor_transform(image)
 
         if self.transforms is not None:
-            torch_image = self.transforms(torch_image)
-            torch_mask = self.transforms(torch_mask)
+            # apply transforms to both images simultaneously,
+            # so that random transforms (like RandomCrop) are consistent
+            # https://discuss.pytorch.org/t/how-to-apply-same-transform-on-a-pair-of-picture/14914/3?u=ssgosh
+            if isinstance(self.transforms, RandomCrop):
+                i, j, h, w = self.transforms.get_params(
+                    torch_image, output_size=(self.image_height, self.image_width)
+                )
+                torch_image = TF.crop(torch_image, i, j, h, w)
+                torch_mask = TF.crop(torch_mask, i, j, h, w)
+            else:
+                torch_image = self.transforms(torch_image)
+                torch_mask = self.transforms(torch_mask)
 
         return (torch_image, torch_mask)
 
