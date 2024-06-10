@@ -5,6 +5,8 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
 ## TODO
+- dokończenie sprawka
+- gałąź report
 - [ ] przygotowanie wstępne ('pocięcie' obrazków) w większych datasetach
     - [ ] UAVid
         - [ ] debug

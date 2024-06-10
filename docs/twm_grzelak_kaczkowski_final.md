@@ -12,6 +12,8 @@
 * segmentation-models-pytorch
 * torchmetrics
 
+## Wzory
+
 ## INRIA
 
 ### Ustawienia ogólne

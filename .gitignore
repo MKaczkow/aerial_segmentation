@@ -28,19 +28,27 @@ metrics
 
 # data
 test_patch
-**/image_patches
-**/mask_patches
+
 data/DubaiSemanticSegmentationDataset/**/*.png
 data/DubaiSemanticSegmentationDataset/**/*.jpg
 data/DubaiSemanticSegmentationDataset/**/*.json
+
 data/AerialDroneSemanticSegmentationDataset/**/*.png
 data/AerialDroneSemanticSegmentationDataset/**/*.jpg
 data/AerialDroneSemanticSegmentationDataset/**/*.csv
+
 data/INRIAAerialImageLabellingDataset/**/*.png
 data/INRIAAerialImageLabellingDataset/**/*.jpg
 data/INRIAAerialImageLabellingDataset/**/*.tif
+
+data/INRIAAerialImageLabellingDatasetPatches/**/*.png
+data/INRIAAerialImageLabellingDatasetPatches/**/*.jpg
+
 data/UAVidSemanticSegmentationDataset/**/*.png
 data/UAVidSemanticSegmentationDataset/**/*.jpg
+
+data/UAVidSemanticSegmentationDatasetPatches/**/*.png
+data/UAVidSemanticSegmentationDatasetPatches/**/*.jpg
 
 # logs
 logs/*
