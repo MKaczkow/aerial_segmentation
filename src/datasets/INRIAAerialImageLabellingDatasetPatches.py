@@ -41,7 +41,7 @@ class INRIAAerialImageLabellingDatasetPatches(Dataset):
 
             if self.transforms is not None:
                 for transform in self.transforms:
-                    torch_gt = transform(torch_gt)       
+                    torch_gt = transform(torch_gt)
 
             return (torch_image, torch_gt)
 
