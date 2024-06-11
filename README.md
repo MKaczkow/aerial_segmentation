@@ -19,6 +19,7 @@ Repo for TWM (Machine Vision Techniques) project @ WUT 24L semester
     - funkcja straty 'na kartce' (upewnić się co i jak dokładnie działa, f straty 
     zawsze min. i tak dalej)
     - Compose zamiast for transform in self.transforms
+    - KAGGLE !
     - ... 
 - [ ] trening na jednym datasecie + test na jednym datasecie
 - [ ] użycie `Crop` lub `Pad` zamiast `Resize` - może będą lepsze wyniki?
